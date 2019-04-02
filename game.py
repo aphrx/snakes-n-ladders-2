@@ -45,10 +45,6 @@ bluegoti = pygame.image.load("img/bluegoti.png")
 menubg = pygame.image.load("img/menu.jpg")
 p = pygame.image.load("img/playbg.jpg")
 intbg = pygame.image.load("img/intropic.png")
-intbg2 = pygame.image.load("img/intropic2.jpg")
-intbg3 = pygame.image.load("img/intropic3.jpg")
-intbg4 = pygame.image.load("img/intropic4.jpg")
-intbg5 = pygame.image.load("img/intropic5.jpg")
 credits1 = pygame.image.load("img/credits.jpg")
 
 pygame.mixer.music.load("wav/music.wav")
@@ -283,31 +279,10 @@ def button3(text, xmouse, ymouse, x, y, w, h, i, a, fs):
         #pygame.display.update()
 def intro():
     time = pygame.time.get_ticks()
-    while pygame.time.get_ticks() - time < 2500:
+    while pygame.time.get_ticks() - time < 1000:
         GD.blit(intbg, (0, 0))
         pygame.display.update()
-    while True:
-        time = pygame.time.get_ticks()
-        while pygame.time.get_ticks() - time < 500:
-            GD.blit(intbg2, (0, 0))
-            pygame.display.update()
-        time = pygame.time.get_ticks()
-        while pygame.time.get_ticks() - time < 500:
-            GD.blit(intbg3, (0, 0))
-            pygame.display.update()
-        time = pygame.time.get_ticks()
-        while pygame.time.get_ticks() - time < 500:
-            GD.blit(intbg4, (0, 0))
-            pygame.display.update()
-        time = pygame.time.get_ticks()
-        while pygame.time.get_ticks() - time < 500:
-            GD.blit(intbg5, (0, 0))
-            pygame.display.update()
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                return
-        pygame.display.update()
-
+    return
 def credit():
     while True:
         GD.blit(credits1, (0, 0))
@@ -337,9 +312,9 @@ def main():
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
         GD.blit(menubg, (0, 0))
-        button("Play", mouse[0], mouse[1], (w / 2 - 100), h / 2, 200, 100, green, b_green, 60, 1)
+        button("Play", mouse[0], mouse[1], (w / 2 - 100) - 200, (h / 2) + 300, 200, 50, green, b_green, 25, 1)
 
-        button("Quit", mouse[0], mouse[1], 0, 0, 200, 50, red, b_red, 25, 0)
+        button("Quit", mouse[0], mouse[1], (w / 2 - 100) + 200, (h / 2) + 300, 200, 50, red, b_red, 25, 0)
 
         mouse = pygame.mouse.get_pos()
         if button2("Mute Music", mouse[0], mouse[1], 1166, 0, 200, 50, purple, b_purple, 25):
@@ -368,15 +343,15 @@ def options():
         b1 = b2 = b3 = b4 = b5 = -1
         GD.blit(menubg, (0, 0))
         #Single player button
-        b1 = button("Single Player", mouse[0], mouse[1], (w/2-150), 250, 300, 50, green, b_green, 30, "s")
+        b1 = button("Single Player", mouse[0], mouse[1], (w/2-150), 225, 300, 50, green, b_green, 30, "s")
         #2 player button
-        b2 = button("2 Players", mouse[0], mouse[1], (w/2)-150, 350, 300, 50, green, b_green, 30, 2)
+        b2 = button("2 Players", mouse[0], mouse[1], (w/2)-150, 325, 300, 50, green, b_green, 30, 2)
         #3 player
-        b3 = button("3 Players", mouse[0], mouse[1], (w/2)-150, 450, 300, 50, green, b_green, 30, 3)
+        b3 = button("3 Players", mouse[0], mouse[1], (w/2)-150, 425, 300, 50, green, b_green, 30, 3)
         #4 player
-        b4 = button("4 Players", mouse[0], mouse[1], (w/2)-150, 550, 300, 50, green, b_green, 30, 4)
+        b4 = button("4 Players", mouse[0], mouse[1], (w/2)-150, 525, 300, 50, green, b_green, 30, 4)
         #Back button
-        b5 = button("Back", mouse[0], mouse[1], 0, 0, 200, 50, red, b_red, 30, 5)
+        b5 = button("Back", mouse[0], mouse[1], (w/2)-150, 625, 300, 50, red, b_red, 30, 5)
         if b5 == 5:
             main()
         if b1 == "s":
@@ -435,6 +410,7 @@ def play(b):
         if b == 21:
             #(player,score,text,xmouse,ymouse,x,y,w,h,i,a,fs)
             if button1("Player 1", mouse[0], mouse[1], 100, 700, 200, 50, red, grey, 30):
+            	print mouse[0], mouse[1]
                 if t == 1:
                     p1score, l, s, six = turn(p1score, l, s)
                     if not six:
