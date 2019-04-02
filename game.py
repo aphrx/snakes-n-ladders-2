@@ -12,6 +12,8 @@ pygame.init()
 w=1366
 h=768
 
+automate = 0;
+
 icon=pygame.image.load("img/icon.jpg")
 GD=pygame.display.set_mode((w,h),pygame.FULLSCREEN)
 pygame.display.set_caption("Snakes N Ladders")
@@ -189,19 +191,12 @@ def button2(text, xmouse, ymouse, x, y, w, h, i, a, fs):
     click = pygame.mouse.get_pressed()
     if x + w > xmouse > x and y + h > ymouse >y:
         pygame.draw.rect(GD,a,[x - 2.5, y - 2.5, w + 5, h + 5])
-        if pygame.mouse.get_pressed() == (1,0,0):
+        if pygame.mouse.get_pressed() == (1, 0, 0):
             return True
         
     else:
         pygame.draw.rect(GD,i,[x,y,w,h])
     message_display(text,(x + w + x) / 2, (y + h + y) / 2,fs)    
-    
-    
-
-
-
-
-
 
 #Buttons for playing:
 def button1(text, xmouse, ymouse, x, y, w, h, i, a, fs):
@@ -244,8 +239,8 @@ def turn(score, l, s):
     else: #checks if player score is not grater than 100
         score -= a
         time = pygame.time.get_ticks()
-        while pygame.time.get_ticks()-time<1500:
-            message_display1("Can't move!",650,50,35,black)
+        while pygame.time.get_ticks() - time < 1500:
+            message_display1("Can't move!", 650, 50, 35, black)
             pygame.display.update()
     return score,l,s,six
     
@@ -255,11 +250,13 @@ def Quit():
     pygame.quit()
     quit()
 
+def automate():
+	automate = 1;
 #Buttons:
-def button(text,xmouse,ymouse,x,y,w,h,i,a,fs,b):
+def button(text, xmouse, ymouse, x, y, w, h, i, a, fs, b):
     if x + w > xmouse > x and y + h > ymouse > y:
         pygame.draw.rect(GD,a,[x - 2.5,y - 2.5,w + 5,h + 5])
-        if pygame.mouse.get_pressed()==(1, 0, 0):
+        if pygame.mouse.get_pressed() == (1, 0, 0):
             if b == 1:
                 options()
             elif b == 5:
@@ -270,15 +267,19 @@ def button(text,xmouse,ymouse,x,y,w,h,i,a,fs,b):
                 return b
             elif b == 7:
                 options()
-            else :return True
-                
-            
-            
-            
-                
-            
+            else :return True      
     else:
-        pygame.draw.rect(GD,i,[x,y,w,h])
+        pygame.draw.rect(GD, i, [x, y, w, h])
+    message_display(text,(x + w + x) / 2, (y + h + y) / 2, fs)
+
+
+def button3(text, xmouse, ymouse, x, y, w, h, i, a, fs):
+    if x + w > xmouse > x and y + h > ymouse > y:
+        pygame.draw.rect(GD,a,[x - 2.5,y - 2.5,w + 5,h + 5])
+        if pygame.mouse.get_pressed() == (1, 0, 0):
+            automate()
+    else:
+        pygame.draw.rect(GD, i, [x, y, w, h])
     message_display(text,(x + w + x) / 2, (y + h + y) / 2, fs)
 
 
@@ -350,10 +351,10 @@ def main():
     pygame.mixer.music.play(-1)
 
     
-    menu=True
+    menu = True
     while menu:
         for event in pygame.event.get():
-            if event.type ==pygame.QUIT:
+            if event.type == pygame.QUIT:
                 Quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -364,16 +365,16 @@ def main():
         click = pygame.mouse.get_pressed()
         
         GD.blit(menubg,(0,0))
-        button("Play",mouse[0],mouse[1],(w/2-100),h/2,200,100,green,b_green,60,1)
+        button("Play", mouse[0], mouse[1], (w / 2 - 100), h / 2, 200, 100, green, b_green, 60, 1)
 
-        button("Quit",mouse[0],mouse[1],(w/2-100),(h/2)+200,200,100,red,b_red,60,0)
+        button("Quit", mouse[0], mouse[1], 0, 0, 200, 50, red, b_red, 25, 0)
 
         mouse = pygame.mouse.get_pos()
-        if button2("Mute Music",mouse[0],mouse[1],1166,0,200,50,purple,b_purple,25):
+        if button2("Mute Music", mouse[0], mouse[1], 1166, 0, 200, 50, purple, b_purple, 25):
             pygame.mixer.music.pause()
-        if button2("Play Music",mouse[0],mouse[1],1166,75,200,50,purple,b_purple,25):
+        if button2("Play Music", mouse[0], mouse[1], 1166, 75, 200, 50, purple, b_purple, 25):
             pygame.mixer.music.unpause()
-        if button2("Credits",mouse[0],mouse[1],1166,150,200,50,purple,b_purple,25):
+        if button2("Credits", mouse[0], mouse[1], 1166, 150, 200, 50, purple, b_purple, 25):
             credit()
         
         pygame.display.update()
@@ -406,7 +407,7 @@ def options():
         #4 player
         b4 = button("4 Players",mouse[0],mouse[1],(w/2)-150,550,300,50,green,b_green,30,4)
         #Back button
-        b5 = button("Back",mouse[0],mouse[1],0,650,200,50,red,b_red,30,5)
+        b5 = button("Back", mouse[0], mouse[1], 0, 0, 200, 50, red, b_red, 30, 5)
         if b5 == 5:
             main()
         if b1 == "s":
@@ -459,7 +460,7 @@ def play(b):
     while True:
         l = False
         s = False
-        time=3000
+        time = 3000
         GD.blit(p,(0,0))
         GD.blit(board,(w/2-250,h/2-250))
         mouse = pygame.mouse.get_pos()
@@ -574,6 +575,7 @@ def play(b):
 
         
         b6 = button("Back",mouse[0],mouse[1],0,0,200,50,red,b_red,30,7)
+        b4 = button3("Test",mouse[0],mouse[1],1166,0,200,50,red,b_red,30)
         GD.blit(redgoti,(xcr,ycr))
         if 5>b>1 or b==21:
             GD.blit(yellowgoti,(xcy+2,ycy))
