@@ -1,5 +1,7 @@
 # Snakes and Ladders 2
 
+[Dev Environment Configuration](#Dev-Environment-Configuration) 
+
 Snakes & Ladders is an ancient Indian game first created in the 19th century that has come a long way to becoming a worldwide classic. It is a board game played between two or more players using nothing but a dice. A game that is able to be run from your command line.
 
 **Game Requirements**
