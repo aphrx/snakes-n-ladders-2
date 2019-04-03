@@ -1,9 +1,13 @@
 # Snakes and Ladders 2
 ### Contents ###
 [Main](#The-Game)
+
 [Configuration](#Dev-Environment-Configuration) 
+
 [Ececution](#Run-Game) 
+
 [Game Instructions](#Game-Instructions)
+
 [Build Log](#Build-Log) 
 
 ### The Game
